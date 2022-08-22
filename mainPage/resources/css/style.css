@@ -1,10 +1,14 @@
-/* Add a black background color to the top navigation */
-.topnav {
-    background-color: #333;
-    overflow: hidden;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  }
-  
+  .topnav {
+    background-color: black;
+    position: fixed;
+    width: 100%;
+    padding: 14px 16px;
+    margin: 0;
+    left: 0;
+    top: 0;
+    border-bottom: 1px rgba(255, 255, 255, 0.2) solid;
+}
+
   /* Style the links inside the navigation bar */
   .topnav a {
     float: left;
@@ -20,13 +24,42 @@
     background-color: #ddd;
     color: black;
   }
-  
-  /* Add a color to the active/current link */
-  .topnav a.active {
-    background-color: #04AA6D;
-    color: white;
-  }
-
+ 
   .body {
       font-family: Verdana, Geneva, Tahoma, sans-serif;
   }
+
+  body {
+    background-color: black;
+  }
+  
+  .image img{
+    width: 30%;
+    
+  }
+
+  .main {
+    font-family: 'Raleway', sans-serif;
+    padding-left: 50px;
+    line-height: 20px;
+    display: flex;
+    flex-direction: column;  
+    justify-content: center;   
+    height: 100%; 
+    border: 0;
+    position: absolute;
+}
+.main h2{
+  color: white;
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 10px;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+  font-family: 'Raleway', sans-serif;
+  font-size: 16px;
+
+}
