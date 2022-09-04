@@ -17,6 +17,7 @@ body {
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    z-index: 10;
 }
 
 /* Menu */
@@ -171,6 +172,42 @@ h2 {
 
 }
 
+/* CIRCULAR ANIMATION */
+
+.box svg{
+	height: 110px;
+	width: 110px;
+    transform: rotate(-90deg);
+
+}
+.box svg circle{
+	fill: transparent;
+	stroke: #007eff;
+	stroke-width: 5px;
+	/* CIRCUMFERENCE OF THE CIRCLE */
+	stroke-dasharray: 251.2px; 
+	/* MATCH ABOVE */
+	stroke-dashoffset: 251.2px; 
+	stroke-linecap: round;
+	animation: stroke 1.5s steps(500) forwards;
+	/* 6.75s */
+}
+
+@keyframes stroke{
+	100%{
+		/* CIRCUMFERENCE OF THE CIRCLE*(100%-TARGETPERCENTAGE) */
+		stroke-dashoffset: var(--setCircular);
+	}
+}
+
+#circular text{
+    transform: translate(100%) rotate(90deg);
+    transform-origin: left top;
+
+    -webkit-transform: translate(100%) rotate(90deg);
+    -webkit-transform-origin: left top;
+}
+
 /* 3.Rating */
 
 .ratingContainer{
@@ -201,6 +238,13 @@ h3{
     margin-block-start: 0;
     margin-block-end: 0;
 }
+.myMainRating{
+    grid-column: 3;
+    text-align: center;
+    margin-block-start: 0;
+    margin-block-end: 0;
+}
+
 .space{
     grid-column: 2; 
     margin-block-start: 0;
@@ -215,15 +259,40 @@ h3{
 .bold {
     font-weight: 700 !important;
 }
+.zero {
+    color: #ff3535;
+}
+.one {
+    color: #ff507c;
+}
+.two {
+    color: #ff5099;
+}
+.three {
+    color: #ff50d9;
+}
+.four {
+    color: #f950ff;
+}
+.five {
+    color: #c850ff;
+}
+.six {
+    color: #b050ff;
+}
 .seven {
-    color: #e250ff;
+    color: #b050ff;
 }
 .eight {
-    color: #9c50ff;
+    color: #5053ff;
 }
 .nine {
     color: #5081FF;
 }
+.ten {
+    color: #ffe600;
+}
+
 
 /* DESCRIPTIONS */
 

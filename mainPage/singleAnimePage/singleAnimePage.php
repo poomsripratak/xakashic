@@ -45,15 +45,25 @@
             <!-- Search Bar -->
 
             <div>
-                <form class="searchSection">
+                <form class="searchSection" method = POST>
                     <button class="searchIcon" type="submit"><i class="fa fa-search fa-lg"></i></button>
                     <input class="searchBar" type="text" name="searchBar" id="searchBar" placeholder="Search...">
                     <button class="searchIcon" type="reset"><i class="fa fa-times fa-lg"></i></button>
                 </form>
-                
+                <div class="menuContents" id="searchContents">
+                    <a href="#">Home</a>
+                    <a href="#">Shop</a>
+                    <a href="#">Anime</a>
+                    <a href="#">Tech</a>
+                    <a href="#">Food</a>
+                    <a href="#">Blog</a>
+                    <a href="#">Contact</a>
+                    <a href="#">Settings</a>
+                </div>
             </div>
 
             <script src="resources/js/searchSection.js"></script>
+
 
         </div>
 
@@ -66,18 +76,19 @@
             if($conn->connect_error){
                 die('Connection Failed :'.$conn->connect_error);
             }
-            $sql = "SELECT * FROM `Anime` WHERE `Studios`='Madhouse';";
+            $sql = "SELECT * FROM `Anime` WHERE `Name`='Overlord IV';";
             $query = mysqli_query($conn,$sql);
             while($result=mysqli_fetch_array($query,MYSQLI_ASSOC)){
         ?>
+         <!-- setup vaule for animation -->
+         <script>
+                    const data = <?php echo json_encode($result, JSON_HEX_TAG); ?>; 
+        </script>  
+        
         <div class="title">
             <h5>REVIEWS/ANIME</h5>
             <h1><?php echo $result["Name"];?></h1>
-        </div>          
-        <?php
-            }
-            $conn->close();
-        ?>
+        </div> 
 
         <!-- PRIMARY CONTENT -->
 
@@ -90,64 +101,94 @@
             <!-- 2.Box -->
 
             <div class="boxContainer">
+
                 <div class="box">
                     <h6>Overall Rating</h6>
-                    <h2>8.9</h2>
+                    <div class="centerbox">
+                    <svg id="circular">
+                        <circle id="circularRing" cx="55" cy="55" r="40" style="--setCircular: 0px"></circle>
+                        <text id="circularText" x="50%" y="50%" text-anchor="middle" fill="white" font-size="32px" font-weight="700" dy=".35em">0.0</text>
+                    </svg>
+                    </div>
+
+                    <script src="resources/js/ratingAnimation.js"></script>
+
                 </div>
-                <div class="box">
+
+                <div>
                     <h6>Episodes</h6>
-                    <h2>13</h2>
+                    <h2><?php echo $result["Episodes"];?></h2>
                 </div>
-                <div class="box">
+
+                <div>
                     <h6>Premiered</h6>
-                    <h2>Summer 2022</h2>
+                    <h2 id="premiered">NA</h2>
+                    <script>
+                        var resultPremiered = "";
+                        if (data["Season"]==1){
+                            resultPremiered += "Winter";
+                        }else if (data["Season"]==2){
+                            resultPremiered += "Spring";
+                        }else if (data["Season"]==3){
+                            resultPremiered += "Summer";
+                        }else if (data["Season"]==4){
+                            resultPremiered += "Fall";
+                        }
+                        document.getElementById("premiered").innerHTML = resultPremiered+" "+data["Year"];
+                    </script>
                 </div>
+
             </div>
 
             <!-- 3.Rating -->
 
             <div class="ratingContainer">
+
                 <h3 class="ratingMetric bold">Rating Metric</h3>
                 <h7 class="space"></h7>
-                <h3 class="myRating bold">My Rating</h3>
+                <h3 class="myMainRating bold">My Rating</h3>
                 <div class="row-border"></div>
                 <h3 class="ratingMetric">Overall plot</h3>
                 <h7 class="space"></h7>
-                <h3 class="myRating bold eight">8.8</h3>
+                <h3 class="myRating bold"><?php echo $result["OverallPlot"];?></h3>
                 <h3 class="ratingMetric">Execution</h3>
                 <h7 class="space"></h7>
-                <h3 class="myRating bold nine">9.7</h3>
+                <h3 class="myRating bold"><?php echo $result["Execution"];?></h3>
                 <h3 class="ratingMetric">Uniqueness</h3>
                 <h7 class="space"></h7>
-                <h3 class="myRating bold eight">8.8</h3>
+                <h3 class="myRating bold"><?php echo $result["Uniqueness"];?></h3>
                 <h3 class="ratingMetric">WOW factor</h3>
                 <h7 class="space"></h7>
-                <h3 class="myRating bold nine">9.0</h3>
+                <h3 class="myRating bold"><?php echo $result["WOWFactor"];?></h3>
                 <h3 class="ratingMetric">Consistency</h3>
                 <h7 class="space"></h7>
-                <h3 class="myRating bold eight">8.5</h3>
+                <h3 class="myRating bold"><?php echo $result["Conflict"];?></h3>
                 <h3 class="ratingMetric">Characters</h3>
                 <h7 class="space"></h7>
-                <h3 class="myRating bold seven">7.5</h3>
+                <h3 class="myRating bold"><?php echo $result["Characters"];?></h3>
                 <h3 class="ratingMetric">Vibe</h3>
                 <h7 class="space"></h7>
-                <h3 class="myRating bold nine">9.7</h3>
+                <h3 class="myRating bold"><?php echo $result["Vibe"];?></h3>
                 <h3 class="ratingMetric">Art/Animation</h3>
                 <h7 class="space"></h7>
-                <h3 class="myRating bold eight">8.5</h3>
+                <h3 class="myRating bold"><?php echo $result["ArtAnimation"];?></h3>
                 <h3 class="ratingMetric">Music</h3>
                 <h7 class="space"></h7>
-                <h3 class="myRating bold seven">7.9</h3>
+                <h3 class="myRating bold"><?php echo $result["Music"];?></h3>
                 <h3 class="ratingMetric">Personal preference</h3>
                 <h7 class="space"></h7>
-                <h3 class="myRating bold nine">9.7</h3>             
+                <h3 class="myRating bold"><?php echo $result["PersonalPref"];?></h3>      
+
+                <script src="resources/js/myRating.js"></script>
+
             </div>
+
         </div>
 
         <!-- DESCRIPTIONS -->
 
         <div class="padding50">
-            <h3 class="white">“Best reincarnation in video game anime, extremely strong plot with a lot of badass moment.  Extremely well execute. No unnecessary filler. Although a bit more action scene might be good but fair enough, it will be hard for op mc. Truly one of the housemen of isekai and my personal GOAT anime.”</h3>
+            <h3 class="white"><?php echo $result["Review"];?></h3>
         </div>
 
         <!-- MORE INFO -->
@@ -156,27 +197,41 @@
             <div class="moreInfo">
                 <div class="section">
                     <h7 class="ssection">Release data</h7>
-                    <h3 class="ssection">05-07-2022</h3>
+                    <h3 class="ssection"><?php echo $result["ReleaseDate"];?></h3>
                 </div>
                 <div class="section">
                     <h7 class="ssection">Theme</h7>
-                    <h3 class="ssection">Isekai, Video Game</h3>
+                    <h3 class="ssection"><?php echo $result["Theme"];?></h3>
                 </div>
                 <div class="section">
                     <h7 class="ssection">Genres</h7>
-                    <h3 class="ssection">Action, Fantasy, Supernatural</h3>
+                    <h3 class="ssection"><?php echo $result["Genres"];?></h3>
                 </div>
                 <div class="section">
                     <h7 class="ssection">Duration</h7>
-                    <h3 class="ssection">5 hr</h3>
+                    <h3 class="ssection" id="duration"></h3>
+                    <script>
+                        const dur = document.getElementById("duration");
+                        const valueDur = data["Duration"];
+                        if (Number(valueDur)>=60){
+                            const valueDuration = Number(valueDur)/60;
+                            if (Number.isInteger(valueDuration)){
+                                dur.innerHTML=valueDuration+" hr";
+                            }else {
+                                dur.innerHTML=Math.floor(valueDuration)+" hr "+Number(valueDur) % 60+" min";
+                            }
+                        }else{
+                            dur.innerHTML=Number(valueDur)+" min";
+                        }
+                    </script>
                 </div>
                 <div class="section">
                     <h7 class="ssection">Studios</h7>
-                    <h3 class="ssection">Madhouse</h3>
+                    <h3 class="ssection"><?php echo $result["Studios"];?></h3>
                 </div>
                 <div class="section">
                     <h7 class="ssection">Source</h7>
-                    <h3 class="ssection">Lightnovel</h3>
+                    <h3 class="ssection"><?php echo $result["Source"];?></h3>
                 </div>
             </div>
         </div>
@@ -328,7 +383,10 @@
             </form>
         </div>
 
-
+        <?php
+            }
+            $conn->close();
+        ?>
 
     </body>
 </html>
