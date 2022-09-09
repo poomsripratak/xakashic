@@ -1,0 +1,45 @@
+body{
+    background-color: black;
+}
+.sequel {
+    border: 0;
+    padding: 0 50px;
+    color: white;
+}
+
+/* POSTER */
+
+.posters {
+    display:flex;
+    justify-content: space-between ;
+    column-gap: 10px;
+    border: 0;
+    padding: 0;
+    overflow: hidden;
+}
+.onePoster {
+    display: block;
+    justify-content: column;
+}
+.overlay {
+    border-top: 1px rgba(255, 255, 255, 0.2) solid;
+    background-color: black;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
+    text-overflow: "...";
+    white-space: nowrap;
+    max-width: 240px;
+}
+/* !!!! */
+
+.overlay h6{
+    margin: 0;
+}
+
+.poster {
+    max-width: 250px;
+    object-fit: cover;
+    aspect-ratio: 427 /604;
+}
